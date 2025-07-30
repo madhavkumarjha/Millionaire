@@ -1,0 +1,508 @@
+[
+  {
+    "id": 1,
+    "question": "Which of the following is used in React.js to increase performance?",
+    "answers": [
+      {
+        "text": "Virtual DOM",
+        "correct": true
+      },
+      {
+        "text": "Original DOM",
+        "correct": false
+      },
+      {
+        "text": "Both of the above",
+        "correct": false
+      },
+      {
+        "text": "None of these",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "What function is used to change the state in React?",
+    "answers": [
+      {
+        "text": "modifyState()",
+        "correct": false
+      },
+      {
+        "text": "changeState()",
+        "correct": false
+      },
+      {
+        "text": "updateState()",
+        "correct": false
+      },
+      {
+        "text": "setState()",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "What is JSX in React?",
+    "answers": [
+      {
+        "text": "Java Syntax Extension",
+        "correct": false
+      },
+      {
+        "text": "JSON Exchange",
+        "correct": false
+      },
+      {
+        "text": "JavaScript XML",
+        "correct": true
+      },
+      {
+        "text": "JavaScript Extension",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "The average case complexity of quick sort for sorting n numbers is",
+    "answers": [
+      {
+        "text": "O(n^2)",
+        "correct": false
+      },
+      {
+        "text": "O(n log n)",
+        "correct": true
+      },
+      {
+        "text": "O(n)",
+        "correct": false
+      },
+      {
+        "text": "O(log n)",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "A dequeue operation removes an element",
+    "answers": [
+      {
+        "text": "From the front of the queue",
+        "correct": false
+      },
+      {
+        "text": "From any place in the queue",
+        "correct": false
+      },
+      {
+        "text": "From the rear of the queue",
+        "correct": true
+      },
+      {
+        "text": "None of the above",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "What is the minimum number of nodes in a complete binary tree with depth 3?",
+    "answers": [
+      {
+        "text": "4",
+        "correct": false
+      },
+      {
+        "text": "5",
+        "correct": true
+      },
+      {
+        "text": "6",
+        "correct": false
+      },
+      {
+        "text": "7",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "What is the number of nodes in a full binary tree with depth 3?",
+    "answers": [
+      {
+        "text": "5",
+        "correct": false
+      },
+      {
+        "text": "6",
+        "correct": false
+      },
+      {
+        "text": "7",
+        "correct": true
+      },
+      {
+        "text": "8",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Which of the following operation is not supported by a queue?",
+    "answers": [
+      {
+        "text": "Inserting element at rear",
+        "correct": false
+      },
+      {
+        "text": "Removing element from front",
+        "correct": false
+      },
+      {
+        "text": "Removing element from middle",
+        "correct": true
+      },
+      {
+        "text": "None of the above",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "question": "An enqueue operation adds an element",
+    "answers": [
+      {
+        "text": "At any position in the queue",
+        "correct": false
+      },
+      {
+        "text": "To the front of the queue",
+        "correct": false
+      },
+      {
+        "text": "To the rear of the queue",
+        "correct": true
+      },
+      {
+        "text": "None of the above",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Which of the following is not an entity?",
+    "answers": [
+      {
+        "text": "Book",
+        "correct": false
+      },
+      {
+        "text": "Student",
+        "correct": false
+      },
+      {
+        "text": "Employee",
+        "correct": false
+      },
+      {
+        "text": "Roll number",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "question": "What kind of list is best to answer many questions such as 'what is the item at position n?'",
+    "answers": [
+      {
+        "text": "Singly-linked lists",
+        "correct": false
+      },
+      {
+        "text": "Doubly-linked lists",
+        "correct": false
+      },
+      {
+        "text": "Lists implemented with an array",
+        "correct": true
+      },
+      {
+        "text": "Circular- linked lists",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "question": "Which of following operations are generally not performed on report files?",
+    "answers": [
+      {
+        "text": "Updation",
+        "correct": true
+      },
+      {
+        "text": "Maintenance",
+        "correct": false
+      },
+      {
+        "text": "Retrieval",
+        "correct": false
+      },
+      {
+        "text": "All of above",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "question": "When is insertion sort a good choice for sorting an array?",
+    "answers": [
+      {
+        "text": "The array has only a few elements out of place",
+        "correct": false
+      },
+      {
+        "text": "Each element of array requires a small amount of memory",
+        "correct": false
+      },
+      {
+        "text": "The processor speed is fast",
+        "correct": false
+      },
+      {
+        "text": "Each element of array requires a large amount of memory",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "question": "A data structure in which linear sequence is maintained by pointers is known as",
+    "answers": [
+      {
+        "text": "Array",
+        "correct": false
+      },
+      {
+        "text": "Stack",
+        "correct": false
+      },
+      {
+        "text": "Linked list",
+        "correct": true
+      },
+      {
+        "text": "Pointer-based data structure",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "question": "Which of the following data structure works on the principle of First Come First Serve?",
+    "answers": [
+      {
+        "text": "Priority queue",
+        "correct": false
+      },
+      {
+        "text": "Heap",
+        "correct": false
+      },
+      {
+        "text": "Stack",
+        "correct": false
+      },
+      {
+        "text": "Queue",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "question": "A ____ is a linear collection of self-referential structures, called nodes, connected by pointer links.",
+    "answers": [
+      {
+        "text": "Queue",
+        "correct": false
+      },
+      {
+        "text": "Linked list",
+        "correct": true
+      },
+      {
+        "text": "Tree",
+        "correct": false
+      },
+      {
+        "text": "Stack",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "question": "A queue where all elements have equal priority is a",
+    "answers": [
+      {
+        "text": "ILFO data structure",
+        "correct": false
+      },
+      {
+        "text": "LILO data structure",
+        "correct": false
+      },
+      {
+        "text": "FIFO data structure",
+        "correct": true
+      },
+      {
+        "text": "LIFO data structure",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "question": "A file that is only read by a program is known as ____",
+    "answers": [
+      {
+        "text": "Input file",
+        "correct": true
+      },
+      {
+        "text": "Temporary file",
+        "correct": false
+      },
+      {
+        "text": "Work file",
+        "correct": false
+      },
+      {
+        "text": "Input/output file",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "question": "Which of the following sorting algorithm is the slowest?",
+    "answers": [
+      {
+        "text": "Bubble sort",
+        "correct": false
+      },
+      {
+        "text": "Heap sort",
+        "correct": false
+      },
+      {
+        "text": "Shell sort",
+        "correct": false
+      },
+      {
+        "text": "Quick sort",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "question": "Which of the following data structure can be used to represent many-to-many relation?",
+    "answers": [
+      {
+        "text": "B-tree",
+        "correct": false
+      },
+      {
+        "text": "Binary tree",
+        "correct": false
+      },
+      {
+        "text": "Graph",
+        "correct": true
+      },
+      {
+        "text": "All of above",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "question": "Which of the following statement is not true about linked lists?",
+    "answers": [
+      {
+        "text": "Element in a linked list, if it is sorted, can be quickly searched by applying binary search technique",
+        "correct": true
+      },
+      {
+        "text": "Elements are not necessarily stored in contiguous locations",
+        "correct": false
+      },
+      {
+        "text": "Insertions and deletions can be performed efficiently as compared to arrays",
+        "correct": false
+      },
+      {
+        "text": "Linked list is a dynamic structure",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "question": "Which of the following is not a linear data structure?",
+    "answers": [
+      {
+        "text": "Stack",
+        "correct": false
+      },
+      {
+        "text": "Queue",
+        "correct": false
+      },
+      {
+        "text": "Linked list",
+        "correct": false
+      },
+      {
+        "text": "Binary tree",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "question": "Which of the following data structure permits insertion and deletion operations only on one end of the structure?",
+    "answers": [
+      {
+        "text": "Linked list",
+        "correct": false
+      },
+      {
+        "text": "Array",
+        "correct": false
+      },
+      {
+        "text": "Stack",
+        "correct": true
+      },
+      {
+        "text": "Queue",
+        "correct": false
+      }
+    ]
+  }
+]
