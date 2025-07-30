@@ -285,28 +285,7 @@
       }
     ]
   },
-  {
-    "id": 23,
-    "question": "A data structure in which linear sequence is maintained by pointers is known as",
-    "answers": [
-      {
-        "text": "Array",
-        "correct": false
-      },
-      {
-        "text": "Stack",
-        "correct": false
-      },
-      {
-        "text": "Linked list",
-        "correct": true
-      },
-      {
-        "text": "Pointer-based data structure",
-        "correct": false
-      }
-    ]
-  },
+ 
   {
     "id": 14,
     "question": "Which of the following data structure works on the principle of First Come First Serve?",
@@ -501,6 +480,28 @@
       },
       {
         "text": "Queue",
+        "correct": false
+      }
+    ]
+  },
+   {
+    "id": 23,
+    "question": "A data structure in which linear sequence is maintained by pointers is known as",
+    "answers": [
+      {
+        "text": "Array",
+        "correct": false
+      },
+      {
+        "text": "Stack",
+        "correct": false
+      },
+      {
+        "text": "Linked list",
+        "correct": true
+      },
+      {
+        "text": "Pointer-based data structure",
         "correct": false
       }
     ]

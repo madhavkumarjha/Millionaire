@@ -5,6 +5,7 @@
     color: white;
 }
 
+
 .main{
     width: 75%;
     background: linear-gradient(to bottom,rgba(0,0,0,0),#020230), url('./assets/bg.jpg') center;
@@ -36,6 +37,7 @@
 
 .bottom{
     height: 50%;
+    /* cursor: pointer; */
 }
 
 .trivia{
@@ -190,4 +192,13 @@
     font-weight: 500;
     cursor: pointer;
     background: linear-gradient(#9371ce, #22074d);
+}
+
+.restartButton{
+  width: 50%;
+  position: absolute;
+  top: 60%;
+    /* bottom: 40; */
+    left: 15%;
+    /* right: 0; */
 }

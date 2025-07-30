@@ -4,19 +4,17 @@ import Trivia from "./components/Trivia";
 import { useMemo } from "react";
 import Timer from "./components/Timer";
 import Start from "./components/Start";
-import questions from './questions.json';
+import questions from "./questions.json";
 function App() {
   const [username, setUsername] = useState(null);
   const [questionNumber, setQuestionNumber] = useState(1);
   const [data, setData] = useState([]);
   const [earned, setEarned] = useState("$ 0");
   const [stop, setStop] = useState(false);
- 
 
   useEffect(() => {
-   setData(questions);
+    setData(questions);
   }, []);
-
 
   const moneyPyramid = useMemo(
     () =>
@@ -51,7 +49,12 @@ function App() {
         <>
           <div className="main">
             {stop ? (
-              <h1 className="endText">You earned : {earned} </h1>
+              <>
+                <h1 className="endText">You earned : {earned}</h1>
+                <button className="startButton restartButton " onClick={() => window.location.reload()}>
+                  Restart
+                </button>
+              </>
             ) : (
               <>
                 <div className="top">

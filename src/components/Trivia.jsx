@@ -17,7 +17,7 @@ const Trivia = ({data,setStop,questionNumber,setQuestionNumber}) => {
 
   useEffect(()=>{
     letsPlay();
-  },[letsPlay]);
+  },[]);
 
   useEffect(()=>{
     setQuestion(data[questionNumber-1]);
@@ -53,8 +53,8 @@ const Trivia = ({data,setStop,questionNumber,setQuestionNumber}) => {
         <div className="question">{question?.question}</div>
         <div className="answers">
           {
-            question?.answers.map((a,id)=>(
-              <div className={selectAnswer === a?className:"answer"} key={id} onClick={()=>handleClick(a)}>{a.text
+            question?.answers.map((a)=>(
+              <div className={selectAnswer === a?className:"answer"} key={a.text} onClick={()=>handleClick(a)}>{a.text
               }</div>
             ))
           }
