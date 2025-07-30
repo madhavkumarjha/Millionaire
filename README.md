@@ -1,12 +1,62 @@
-# React + Vite
+# 💰 Millionaire Quiz App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive and interactive "Who Wants to Be a Millionaire?" style quiz game built using **Vite** and **React**.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Fast build using Vite
+- Dynamic quiz flow with increasing difficulty
+- Sound effects and animations
+- Progress tracking and score system
+- Fully responsive design
+- Restart or retry quiz anytime
 
-## Expanding the ESLint configuration
+## 🧰 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ⚡ Vite
+- ⚛️ React
+- 🎨 Tailwind CSS (optional)
+- 🔊 Howler.js for sound (optional)
+- ⏳ Framer Motion for animations (optional)
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/madhavkumarjha/Millionaire.git
+cd Millionaire
+npm install
+npm run dev
+```
+## 📁 Project Structure
+```
+src/
+├── components/
+│   ├── Trivia.jsx
+│   ├── Timer.jsx
+│   └── Start.jsx
+├── sounds/
+│   ├── play.mp3
+│   ├── correct.mp3
+│   └── wrong.mp3
+├── App.jsx
+└── main.jsx
+|
+├── App.jsx
+└── main.jsx
+|── questions.json
+└── App.css
+```
+
+## 🔒 Optional Extras (Advanced)
+- Lifelines: Add 50:50 or skip question as a bonus feature.
+- Leaderboard: Store top scores in localStorage or Firebase.
+- Sound Toggle: Allow user to mute/unmute sounds.
+- Theme Toggle: Light/Dark mode with Tailwind or CSS.
+- Earn virtual money as you climb the question ladder.
+
+
+## 🎮 Gameplay
+- Answer 15 multiple-choice questions correctly to become a Millionaire!
+
+- Each question gets harder as you progress.
+
