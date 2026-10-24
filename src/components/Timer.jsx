@@ -1,20 +1,32 @@
 import { useEffect, useState } from "react";
 
-const Timer = ({ setStop, questionNumber }) => {
+const Timer = ({ paused, onTimeUp }) => {
   const [timer, setTimer] = useState(30);
+
   useEffect(() => {
-    if (timer === 0) return setStop(true);
-    const interval = setInterval(() => {
+    if (paused) return;
+
+    if (timer === 0) {
+      onTimeUp();
+      return;
+    }
+
+    const timerId = setTimeout(() => {
       setTimer((prev) => prev - 1);
     }, 1000);
-    return () => clearInterval(interval);
-  }, [setStop, timer]);
 
-  useEffect(() => {
-    setTimer(30);
-  }, [questionNumber]);
+    return () => clearTimeout(timerId);
+  }, [paused, timer, onTimeUp]);
 
-  return <div>{timer}</div>;
+  return (
+    <div
+      role="timer"
+      aria-label={`Time remaining: ${timer} seconds`}
+      className={`timerText ${timer <= 10 ? "urgent" : ""}`}
+    >
+      {timer}
+    </div>
+  );
 };
 
 export default Timer;

@@ -1,27 +1,41 @@
-import { useRef } from "react";
+import { useState } from "react";
 
-const Start = ({ setUsername }) => {
-  const inputRef = useRef();
+const Start = ({ onStart }) => {
+  const [name, setName] = useState("");
+  const [error, setError] = useState("");
 
-  const handleClick = () => {
-    if (!inputRef.current.value.trim()) {
-      alert("Please enter your name");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const trimmed = name.trim();
+    if (!trimmed) {
+      setError("Please enter your name to begin.");
       return;
     }
-
-    inputRef.current.value && setUsername(inputRef.current.value);
+    setError("");
+    onStart(trimmed);
   };
 
   return (
     <div className="start">
-      <input
-        placeholder="Enter your name"
-        className="startInput"
-        ref={inputRef}
-      />
-      <button className="startButton" onClick={handleClick}>
-        Start
-      </button>
+      <h2 className="startTitle">Who Wants to Be a Millionaire?</h2>
+      <form onSubmit={handleSubmit} className="startForm">
+        <input
+          type="text"
+          placeholder="Enter your name"
+          className="startInput"
+          maxLength={20}
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+            if (error) setError("");
+          }}
+          autoFocus
+        />
+        {error && <p className="startError">{error}</p>}
+        <button type="submit" className="startButton">
+          Start Game
+        </button>
+      </form>
     </div>
   );
 };
