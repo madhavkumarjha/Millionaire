@@ -130,4 +130,29 @@ export function sampleGameQuestions(pool: IQuestion[]): IQuestion[] {
     id: idx + 1 // Re-index sequentially 1 to 15
   }));
 }
-```
+
+---
+
+## 5. Browser IndexedDB Storage Schema (`MillionaireDB`)
+
+Zero-token client storage managed in `src/services/db.js`:
+
+### 5.1 Object Store: `game_history`
+* **KeyPath:** `id` (auto-incrementing integer)
+* **Index:** `date`
+* **Entity Model:**
+  ```typescript
+  interface IGameSessionRecord {
+    id?: number;
+    username: string;
+    earned: string;            // e.g. "$ 1,000,000" or "$ 32,000"
+    questionReached: number;   // 1 to 15
+    status: 'won' | 'lost';
+    timestamp: number;         // Date.now()
+    date: string;              // Human readable date (e.g. "Oct 25, 12:30 AM")
+  }
+  ```
+
+### 5.2 Object Store: `questions_cache`
+* **KeyPath:** `id` (string / number)
+* Stores dynamically fetched Open Trivia questions for offline retrieval.

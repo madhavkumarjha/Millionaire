@@ -1,9 +1,11 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import "./App.css";
 import Trivia from "./components/Trivia";
 import Timer from "./components/Timer";
 import Start from "./components/Start";
 import allQuestions from "./questions.json";
+import { buildHybridQuiz } from "./services/questionEngine";
+import { saveGameSession, getGameHistory } from "./services/db";
 
 const TOTAL_QUESTIONS = 15;
 
@@ -25,36 +27,49 @@ const PRIZES = [
   "$ 1,000,000",
 ];
 
-// Fisher-Yates shuffle algorithm
-function shuffleArray(array) {
-  const arr = [...array];
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
-// BUG-12: Select 5 Tier 1, 5 Tier 2, 5 Tier 3 questions
-function buildQuiz(questions) {
-  const tier1 = shuffleArray(questions.filter((q) => q.difficulty === 1)).slice(0, 5);
-  const tier2 = shuffleArray(questions.filter((q) => q.difficulty === 2)).slice(0, 5);
-  const tier3 = shuffleArray(questions.filter((q) => q.difficulty === 3)).slice(0, 5);
-
-  return [...tier1, ...tier2, ...tier3].map((q, idx) => ({
-    ...q,
-    gameIndex: idx + 1,
-  }));
+// Fallback initial quiz builder using local bank
+function buildInitialQuiz() {
+  const t1 = allQuestions.filter((q) => q.difficulty === 1).slice(0, 5);
+  const t2 = allQuestions.filter((q) => q.difficulty === 2).slice(0, 5);
+  const t3 = allQuestions.filter((q) => q.difficulty === 3).slice(0, 5);
+  return [...t1, ...t2, ...t3].map((q, idx) => ({ ...q, gameIndex: idx + 1 }));
 }
 
 function App() {
   const [username, setUsername] = useState(null);
-  const [quiz, setQuiz] = useState(() => buildQuiz(allQuestions));
+  const [quiz, setQuiz] = useState(buildInitialQuiz);
   const [questionNumber, setQuestionNumber] = useState(1);
   const [status, setStatus] = useState("playing"); // "playing" | "won" | "lost"
   const [locked, setLocked] = useState(false);
 
-  // BUG-10: Derive ladder without storing in state
+  // V2 Features: 50:50 Lifeline, Audio Mute, and IndexedDB Stats
+  const [hasUsed5050, setHasUsed5050] = useState(false);
+  const [eliminatedAnswers, setEliminatedAnswers] = useState([]);
+  const [isMuted, setIsMuted] = useState(false);
+  const [showStatsModal, setShowStatsModal] = useState(false);
+  const [gameHistory, setGameHistory] = useState([]);
+
+  // Mobile Prize Ladder Slide-Up Drawer
+  const [isLadderOpen, setIsLadderOpen] = useState(false);
+
+  // Load fresh 70/30 dynamic questions when starting game
+  const loadDynamicQuestions = async () => {
+    try {
+      const hybridQuiz = await buildHybridQuiz();
+      if (hybridQuiz && hybridQuiz.length === 15) {
+        setQuiz(hybridQuiz);
+      }
+    } catch (err) {
+      console.warn("Using offline quiz set:", err);
+    }
+  };
+
+  const handleStartGame = (name) => {
+    setUsername(name);
+    loadDynamicQuestions();
+  };
+
+  // Derive prize pyramid ladder
   const moneyPyramid = useMemo(
     () =>
       PRIZES.map((amount, idx) => ({
@@ -65,7 +80,7 @@ function App() {
     []
   );
 
-  // BUG-10: Derive current earned amount directly in render
+  // Derive current earned take-home amount
   const currentEarned = useMemo(() => {
     if (status === "won") return "$ 1,000,000";
     if (status === "lost") {
@@ -76,14 +91,50 @@ function App() {
     return questionNumber > 1 ? PRIZES[questionNumber - 2] : "$ 0";
   }, [status, questionNumber]);
 
-  // BUG-03: Timer paused when answer is locked
+  // Save session to IndexedDB once upon game completion
+  const sessionSavedRef = useRef(false);
+  useEffect(() => {
+    if ((status === "won" || status === "lost") && !sessionSavedRef.current && username) {
+      sessionSavedRef.current = true;
+      saveGameSession({
+        username,
+        earned: currentEarned,
+        questionNumber,
+        status,
+      }).then(() => {
+        getGameHistory().then(setGameHistory);
+      });
+    }
+  }, [status, username, currentEarned, questionNumber]);
+
+  // Reset 50:50 eliminated options on question change
+  useEffect(() => {
+    setEliminatedAnswers([]);
+  }, [questionNumber]);
+
+  // 50:50 Lifeline Handler
+  const handleUse5050 = () => {
+    if (hasUsed5050 || locked || status !== "playing") return;
+
+    const currentQ = quiz[questionNumber - 1];
+    if (!currentQ || !currentQ.answers) return;
+
+    const wrongAnswers = currentQ.answers.filter((a) => !a.correct);
+    if (wrongAnswers.length < 2) return;
+
+    const shuffledWrong = [...wrongAnswers].sort(() => 0.5 - Math.random());
+    const eliminated = [shuffledWrong[0].text, shuffledWrong[1].text];
+
+    setEliminatedAnswers(eliminated);
+    setHasUsed5050(true);
+  };
+
   const handleAnswerSelect = () => {
     setLocked(true);
   };
 
   const handleCorrect = () => {
     if (questionNumber >= TOTAL_QUESTIONS) {
-      // BUG-01: Win condition reached
       setStatus("won");
       setLocked(false);
     } else {
@@ -102,12 +153,16 @@ function App() {
     setLocked(false);
   };
 
-  // BUG-06: Restart without reloading page; preserves username
+  // Restart game without page reload
   const handleRestart = () => {
-    setQuiz(buildQuiz(allQuestions));
+    sessionSavedRef.current = false;
     setQuestionNumber(1);
     setStatus("playing");
     setLocked(false);
+    setHasUsed5050(false);
+    setEliminatedAnswers([]);
+    setIsLadderOpen(false);
+    loadDynamicQuestions();
   };
 
   const handleExit = () => {
@@ -115,13 +170,44 @@ function App() {
     handleRestart();
   };
 
-  // Active question derived directly (no empty flashes)
+  const handleOpenStats = async () => {
+    const history = await getGameHistory();
+    setGameHistory(history);
+    setShowStatsModal(true);
+  };
+
   const currentQuestion = quiz[questionNumber - 1];
+
+  // Helper for rendering pyramid rows
+  const renderMoneyItem = (m) => {
+    const isActive = questionNumber === m.id && status === "playing";
+    const isPassed = questionNumber > m.id || status === "won";
+    let itemClass = "moneyListItem";
+    if (isActive) itemClass += " active";
+    if (isPassed) itemClass += " passed";
+    if (m.milestone) itemClass += " milestone";
+
+    return (
+      <li key={m.id} className={itemClass}>
+        <span className="moneyListItemNumber">{m.id}</span>
+        <span className="moneyListItemAmount">{m.amount}</span>
+      </li>
+    );
+  };
 
   return (
     <div className="app">
       {!username ? (
-        <Start onStart={setUsername} />
+        <div className="startContainer">
+          <Start onStart={handleStartGame} />
+          <button
+            type="button"
+            className="historyBtn"
+            onClick={handleOpenStats}
+          >
+            📊 View Stats & History
+          </button>
+        </div>
       ) : (
         <>
           <div className="main">
@@ -131,13 +217,16 @@ function App() {
                 <h2 className="victoryTitle">CONGRATULATIONS, {username.toUpperCase()}!</h2>
                 <h1 className="victorySubtitle">YOU ARE A MILLIONAIRE!</h1>
                 <div className="prizeBadge">$ 1,000,000</div>
-                <p className="endSubtext">You completed all 15 questions perfectly!</p>
+                <p className="endSubtext">Saved to your browser's IndexedDB history!</p>
                 <div className="modalButtons">
                   <button type="button" className="modalButton restartBtn" onClick={handleRestart}>
                     Play Again
                   </button>
+                  <button type="button" className="modalButton statsBtn" onClick={handleOpenStats}>
+                    📊 Stats
+                  </button>
                   <button type="button" className="modalButton exitBtn" onClick={handleExit}>
-                    Exit to Menu
+                    Exit
                   </button>
                 </div>
               </div>
@@ -152,8 +241,11 @@ function App() {
                   <button type="button" className="modalButton restartBtn" onClick={handleRestart}>
                     Try Again
                   </button>
+                  <button type="button" className="modalButton statsBtn" onClick={handleOpenStats}>
+                    📊 Stats
+                  </button>
                   <button type="button" className="modalButton exitBtn" onClick={handleExit}>
-                    Exit to Menu
+                    Exit
                   </button>
                 </div>
               </div>
@@ -161,12 +253,46 @@ function App() {
               <>
                 <div className="top">
                   <div className="hud">
-                    <div className="playerChip">👤 {username}</div>
-                    <div className="bankChip">💰 {currentEarned}</div>
-                    <div className="ladderChip">Question {questionNumber} / 15</div>
+                    <div className="hudGroup">
+                      <div className="playerChip">👤 {username}</div>
+                      <div className="bankChip">💰 {currentEarned}</div>
+                    </div>
+
+                    <div className="hudGroup">
+                      <button
+                        type="button"
+                        className="ladderChipBtn"
+                        onClick={() => setIsLadderOpen(true)}
+                        title="Click to view full Prize Ladder"
+                      >
+                        🏆 Q{questionNumber} / 15
+                      </button>
+
+                      <div className="actionToolbar">
+                        <button
+                          type="button"
+                          className={`lifelineBtn ${hasUsed5050 ? "used" : ""}`}
+                          onClick={handleUse5050}
+                          disabled={hasUsed5050 || locked}
+                          title={hasUsed5050 ? "50:50 Lifeline already used" : "Use 50:50 Lifeline"}
+                        >
+                          50:50
+                        </button>
+
+                        <button
+                          type="button"
+                          className="muteBtn"
+                          onClick={() => setIsMuted((prev) => !prev)}
+                          title={isMuted ? "Unmute Sound" : "Mute Sound"}
+                          aria-label="Toggle Sound"
+                        >
+                          {isMuted ? "🔇" : "🔊"}
+                        </button>
+                      </div>
+                    </div>
                   </div>
 
-                  {/* BUG-03: Key resets timer on each question without effects */}
+                  {/* Timer */}
                   <div className="timer">
                     <Timer
                       key={questionNumber}
@@ -183,33 +309,104 @@ function App() {
                       onAnswerSelect={handleAnswerSelect}
                       onCorrect={handleCorrect}
                       onWrong={handleWrong}
+                      eliminatedAnswers={eliminatedAnswers}
+                      isMuted={isMuted}
                     />
                   )}
+                </div>
+
+                {/* Mobile Sleek Milestone Status Bar (Replaces ugly bottom text clutter) */}
+                <div className="mobileMilestoneBar" onClick={() => setIsLadderOpen(true)}>
+                  <div className="milestoneTarget">
+                    {questionNumber <= 5
+                      ? "🛡️ Safe Haven: $ 1,000 (Q5)"
+                      : questionNumber <= 10
+                      ? "🛡️ Safe Haven: $ 32,000 (Q10)"
+                      : "🏆 Jackpot: $ 1,000,000 (Q15)"}
+                  </div>
+                  <button type="button" className="ladderToggleBtn">
+                    📜 Prize Ladder ▴
+                  </button>
                 </div>
               </>
             )}
           </div>
 
-          <div className="pyramid">
+          {/* Desktop Right Sidebar Pyramid (Desktop Only) */}
+          <aside className="pyramid desktopOnly">
             <ul className="moneyList">
-              {moneyPyramid.map((m) => {
-                const isActive = questionNumber === m.id && status === "playing";
-                const isPassed = questionNumber > m.id || status === "won";
-                let itemClass = "moneyListItem";
-                if (isActive) itemClass += " active";
-                if (isPassed) itemClass += " passed";
-                if (m.milestone) itemClass += " milestone";
-
-                return (
-                  <li key={m.id} className={itemClass}>
-                    <span className="moneyListItemNumber">{m.id}</span>
-                    <span className="moneyListItemAmount">{m.amount}</span>
-                  </li>
-                );
-              })}
+              {moneyPyramid.map((m) => renderMoneyItem(m))}
             </ul>
-          </div>
+          </aside>
+
+          {/* Mobile Slide-Up Prize Ladder Drawer */}
+          {isLadderOpen && (
+            <div className="ladderDrawerOverlay" onClick={() => setIsLadderOpen(false)}>
+              <div className="ladderDrawer" onClick={(e) => e.stopPropagation()}>
+                <div className="drawerHeader">
+                  <h3 className="drawerTitle">🏆 KBC Prize Ladder</h3>
+                  <button
+                    type="button"
+                    className="drawerCloseBtn"
+                    onClick={() => setIsLadderOpen(false)}
+                    aria-label="Close Prize Ladder"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <ul className="moneyList drawerMoneyList">
+                  {moneyPyramid.map((m) => renderMoneyItem(m))}
+                </ul>
+              </div>
+            </div>
+          )}
         </>
+      )}
+
+      {/* IndexedDB Stats & History Modal */}
+      {showStatsModal && (
+        <div className="statsModalOverlay" onClick={() => setShowStatsModal(false)}>
+          <div className="statsModal" onClick={(e) => e.stopPropagation()}>
+            <h2 className="statsTitle">📊 Game Records & History</h2>
+            <p className="statsSubtitle">Stored locally in your browser's IndexedDB</p>
+
+            <div className="statsSummary">
+              <div className="summaryBox">
+                <span className="summaryLabel">Total Games</span>
+                <span className="summaryValue">{gameHistory.length}</span>
+              </div>
+              <div className="summaryBox">
+                <span className="summaryLabel">Victories</span>
+                <span className="summaryValue">
+                  {gameHistory.filter((g) => g.status === "won").length}
+                </span>
+              </div>
+            </div>
+
+            <div className="historyList">
+              {gameHistory.length === 0 ? (
+                <p className="noHistory">No games recorded yet. Play a game to see your stats!</p>
+              ) : (
+                gameHistory.slice(0, 6).map((item) => (
+                  <div key={item.id} className={`historyRow ${item.status}`}>
+                    <span className="histPlayer">{item.username}</span>
+                    <span className="histEarned">{item.earned}</span>
+                    <span className="histQ">Q{item.questionReached}/15</span>
+                    <span className="histDate">{item.date}</span>
+                  </div>
+                ))
+              )}
+            </div>
+
+            <button
+              type="button"
+              className="modalButton closeStatsBtn"
+              onClick={() => setShowStatsModal(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

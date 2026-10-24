@@ -43,10 +43,19 @@
 - [x] **BUG-16 (Data):** Clarified ambiguous wording in Q2 (React class component setState), Q6 (3 levels, root is level 1), and Q7 (3 levels, root is level 1).
 - [x] **BUG-17 (Hygiene):** Renamed package to `"millionaire-quiz"` in `package.json`, set `<title>Who Wants to Be a Millionaire?</title>` in `index.html`.
 
+### Phase 4: V2 Advanced Features & Dynamic Engine (✅ ALL SHIPPED)
+- [x] **70/30 KBC Dynamic Hybrid Engine:** 10 fresh questions fetched live from Open Trivia DB + 5 local classics, with zero-lag offline fallback.
+- [x] **Rich Trivia Dataset:** 34 curated, authentic KBC questions spanning Science, History, Geography, Astronomy, Nature, and Sports with topic badges.
+- [x] **Browser IndexedDB Storage (`MillionaireDB`):** Zero-token, zero-cost local database storing run history (`game_history`) and cached questions (`questions_cache`).
+- [x] **Stats & History Modal:** Modal displaying Total Games, Victories, and Past Runs history from IndexedDB.
+- [x] **50:50 Lifeline:** One-time use per game, eliminates 2 incorrect options.
+- [x] **Audio Mute/Unmute Toggle:** Integrated in top HUD for instant sound control.
+- [x] **Mobile UX Overhaul (Clean Bottom Layout):** Replaced cramped multi-line text pyramid on mobile with a sleek Safe Haven milestone bar and a smooth slide-up glass drawer for the prize ladder.
+
 ---
 
 ## 🔮 Future Backlog (V3)
-- [ ] 50:50 Lifeline
-- [ ] Audience Poll Lifeline
-- [ ] Sound Mute / Unmute Toggle Button
-- [ ] Persistent LocalStorage Leaderboard
+- [ ] Audience Poll Lifeline (weighted probability voting chart)
+- [ ] Flip the Question Lifeline (swap active question with tier backup)
+- [ ] Walk Away / Cash Out Option (quit early to lock current money)
+- [ ] Global Cloud Leaderboard (optional REST API integration)

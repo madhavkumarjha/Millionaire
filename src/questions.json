@@ -2,254 +2,409 @@
   {
     "id": 1,
     "difficulty": 1,
-    "question": "Which of the following is used in React.js to increase performance?",
+    "category": "Science",
+    "question": "Which is the closest planet to the Sun in our solar system?",
     "answers": [
-      { "text": "Virtual DOM", "correct": true },
-      { "text": "Original DOM", "correct": false },
-      { "text": "Both of the above", "correct": false },
-      { "text": "None of these", "correct": false }
+      { "text": "Venus", "correct": false },
+      { "text": "Mercury", "correct": true },
+      { "text": "Mars", "correct": false },
+      { "text": "Earth", "correct": false }
     ]
   },
   {
     "id": 2,
     "difficulty": 1,
-    "question": "In a React class component, what function is used to change the state?",
+    "category": "General Knowledge",
+    "question": "How many days are there in a standard Leap Year?",
     "answers": [
-      { "text": "modifyState()", "correct": false },
-      { "text": "changeState()", "correct": false },
-      { "text": "updateState()", "correct": false },
-      { "text": "setState()", "correct": true }
+      { "text": "364", "correct": false },
+      { "text": "365", "correct": false },
+      { "text": "366", "correct": true },
+      { "text": "367", "correct": false }
     ]
   },
   {
     "id": 3,
     "difficulty": 1,
-    "question": "What is JSX in React?",
+    "category": "Science",
+    "question": "Which gas do green plants primarily absorb from the atmosphere during photosynthesis?",
     "answers": [
-      { "text": "Java Syntax Extension", "correct": false },
-      { "text": "JSON Exchange", "correct": false },
-      { "text": "JavaScript XML", "correct": true },
-      { "text": "JavaScript Extension", "correct": false }
+      { "text": "Oxygen", "correct": false },
+      { "text": "Nitrogen", "correct": false },
+      { "text": "Carbon Dioxide", "correct": true },
+      { "text": "Hydrogen", "correct": false }
     ]
   },
   {
     "id": 4,
-    "difficulty": 3,
-    "question": "The average case complexity of quick sort for sorting n numbers is",
+    "difficulty": 1,
+    "category": "Geography",
+    "question": "What is the national currency of Japan?",
     "answers": [
-      { "text": "O(n^2)", "correct": false },
-      { "text": "O(n log n)", "correct": true },
-      { "text": "O(n)", "correct": false },
-      { "text": "O(log n)", "correct": false }
+      { "text": "Yuan", "correct": false },
+      { "text": "Yen", "correct": true },
+      { "text": "Won", "correct": false },
+      { "text": "Ringgit", "correct": false }
     ]
   },
   {
     "id": 5,
-    "difficulty": 2,
-    "question": "A dequeue operation removes an element",
+    "difficulty": 1,
+    "category": "Technology",
+    "question": "In computer systems, what does the acronym 'CPU' stand for?",
     "answers": [
-      { "text": "From the front of the queue", "correct": true },
-      { "text": "From any place in the queue", "correct": false },
-      { "text": "From the rear of the queue", "correct": false },
-      { "text": "None of the above", "correct": false }
+      { "text": "Central Processing Unit", "correct": true },
+      { "text": "Computer Personal Unit", "correct": false },
+      { "text": "Central Power Unit", "correct": false },
+      { "text": "Core Processing Utility", "correct": false }
     ]
   },
   {
     "id": 6,
-    "difficulty": 3,
-    "question": "What is the minimum number of nodes in a complete binary tree with 3 levels (root is level 1)?",
+    "difficulty": 1,
+    "category": "Human Biology",
+    "question": "Which major organ is responsible for pumping blood throughout the human body?",
     "answers": [
-      { "text": "4", "correct": true },
-      { "text": "5", "correct": false },
-      { "text": "6", "correct": false },
-      { "text": "7", "correct": false }
+      { "text": "Lungs", "correct": false },
+      { "text": "Liver", "correct": false },
+      { "text": "Kidney", "correct": false },
+      { "text": "Heart", "correct": true }
     ]
   },
   {
     "id": 7,
-    "difficulty": 3,
-    "question": "What is the number of nodes in a full binary tree with 3 levels (root is level 1)?",
+    "difficulty": 1,
+    "category": "History",
+    "question": "Who is reverently known as the 'Father of the Nation' in India?",
     "answers": [
-      { "text": "5", "correct": false },
-      { "text": "6", "correct": false },
-      { "text": "7", "correct": true },
-      { "text": "8", "correct": false }
+      { "text": "Jawaharlal Nehru", "correct": false },
+      { "text": "Mahatma Gandhi", "correct": true },
+      { "text": "Subhas Chandra Bose", "correct": false },
+      { "text": "Dr. B. R. Ambedkar", "correct": false }
     ]
   },
   {
     "id": 8,
-    "difficulty": 2,
-    "question": "Which of the following operation is not supported by a queue?",
+    "difficulty": 1,
+    "category": "Science",
+    "question": "At standard atmospheric pressure, at what temperature does pure water boil?",
     "answers": [
-      { "text": "Inserting element at rear", "correct": false },
-      { "text": "Removing element from front", "correct": false },
-      { "text": "Removing element from middle", "correct": true },
-      { "text": "None of the above", "correct": false }
+      { "text": "90°C", "correct": false },
+      { "text": "100°C", "correct": true },
+      { "text": "110°C", "correct": false },
+      { "text": "120°C", "correct": false }
     ]
   },
   {
     "id": 9,
-    "difficulty": 2,
-    "question": "An enqueue operation adds an element",
+    "difficulty": 1,
+    "category": "Nature",
+    "question": "Which animal is famously referred to as the 'Ship of the Desert'?",
     "answers": [
-      { "text": "At any position in the queue", "correct": false },
-      { "text": "To the front of the queue", "correct": false },
-      { "text": "To the rear of the queue", "correct": true },
-      { "text": "None of the above", "correct": false }
+      { "text": "Camel", "correct": true },
+      { "text": "Elephant", "correct": false },
+      { "text": "Horse", "correct": false },
+      { "text": "Donkey", "correct": false }
     ]
   },
   {
     "id": 10,
     "difficulty": 1,
-    "question": "Which of the following is not an entity?",
+    "category": "Sports",
+    "question": "In a standard game of cricket, how many players from one team are on the field at a time?",
     "answers": [
-      { "text": "Book", "correct": false },
-      { "text": "Student", "correct": false },
-      { "text": "Employee", "correct": false },
-      { "text": "Roll number", "correct": true }
+      { "text": "9", "correct": false },
+      { "text": "10", "correct": false },
+      { "text": "11", "correct": true },
+      { "text": "12", "correct": false }
     ]
   },
   {
     "id": 11,
-    "difficulty": 2,
-    "question": "What kind of list is best to answer many questions such as 'what is the item at position n?'",
+    "difficulty": 1,
+    "category": "Art",
+    "question": "Mixing which two primary colors produces the color Green?",
     "answers": [
-      { "text": "Singly-linked lists", "correct": false },
-      { "text": "Doubly-linked lists", "correct": false },
-      { "text": "Lists implemented with an array", "correct": true },
-      { "text": "Circular-linked lists", "correct": false }
+      { "text": "Red and Blue", "correct": false },
+      { "text": "Blue and Yellow", "correct": true },
+      { "text": "Red and Yellow", "correct": false },
+      { "text": "Black and White", "correct": false }
     ]
   },
   {
     "id": 12,
-    "difficulty": 2,
-    "question": "Which of following operations are generally not performed on report files?",
+    "difficulty": 1,
+    "category": "Geography",
+    "question": "Which is the largest and deepest ocean on planet Earth?",
     "answers": [
-      { "text": "Updation", "correct": true },
-      { "text": "Maintenance", "correct": false },
-      { "text": "Retrieval", "correct": false },
-      { "text": "All of above", "correct": false }
+      { "text": "Atlantic Ocean", "correct": false },
+      { "text": "Indian Ocean", "correct": false },
+      { "text": "Arctic Ocean", "correct": false },
+      { "text": "Pacific Ocean", "correct": true }
     ]
   },
   {
     "id": 13,
-    "difficulty": 3,
-    "question": "When is insertion sort a good choice for sorting an array?",
+    "difficulty": 2,
+    "category": "History",
+    "question": "Which Mughal Emperor commissioned the construction of the Taj Mahal in Agra?",
     "answers": [
-      { "text": "The array has only a few elements out of place", "correct": true },
-      { "text": "Each element of array requires a small amount of memory", "correct": false },
-      { "text": "The processor speed is fast", "correct": false },
-      { "text": "Each element of array requires a large amount of memory", "correct": false }
+      { "text": "Akbar", "correct": false },
+      { "text": "Shah Jahan", "correct": true },
+      { "text": "Jahangir", "correct": false },
+      { "text": "Aurangzeb", "correct": false }
     ]
   },
   {
     "id": 14,
-    "difficulty": 1,
-    "question": "Which of the following data structure works on the principle of First Come First Serve?",
+    "difficulty": 2,
+    "category": "Chemistry",
+    "question": "Which precious metal is represented by the chemical symbol 'Au' on the Periodic Table?",
     "answers": [
-      { "text": "Priority queue", "correct": false },
-      { "text": "Heap", "correct": false },
-      { "text": "Stack", "correct": false },
-      { "text": "Queue", "correct": true }
+      { "text": "Silver", "correct": false },
+      { "text": "Gold", "correct": true },
+      { "text": "Copper", "correct": false },
+      { "text": "Platinum", "correct": false }
     ]
   },
   {
     "id": 15,
     "difficulty": 2,
-    "question": "A ____ is a linear collection of self-referential structures, called nodes, connected by pointer links.",
+    "category": "Geography",
+    "question": "What is the official capital city of Australia?",
     "answers": [
-      { "text": "Queue", "correct": false },
-      { "text": "Linked list", "correct": true },
-      { "text": "Tree", "correct": false },
-      { "text": "Stack", "correct": false }
+      { "text": "Sydney", "correct": false },
+      { "text": "Melbourne", "correct": false },
+      { "text": "Canberra", "correct": true },
+      { "text": "Brisbane", "correct": false }
     ]
   },
   {
     "id": 16,
     "difficulty": 2,
-    "question": "A queue where all elements have equal priority is a",
+    "category": "Technology",
+    "question": "Who invented the World Wide Web (WWW) at CERN in 1989?",
     "answers": [
-      { "text": "ILFO data structure", "correct": false },
-      { "text": "LILO data structure", "correct": false },
-      { "text": "FIFO data structure", "correct": true },
-      { "text": "LIFO data structure", "correct": false }
+      { "text": "Bill Gates", "correct": false },
+      { "text": "Steve Jobs", "correct": false },
+      { "text": "Tim Berners-Lee", "correct": true },
+      { "text": "Alan Turing", "correct": false }
     ]
   },
   {
     "id": 17,
-    "difficulty": 1,
-    "question": "A file that is only read by a program is known as ____",
+    "difficulty": 2,
+    "category": "Space Exploration",
+    "question": "In which historic year did the Apollo 11 mission first land humans on the Moon?",
     "answers": [
-      { "text": "Input file", "correct": true },
-      { "text": "Temporary file", "correct": false },
-      { "text": "Work file", "correct": false },
-      { "text": "Input/output file", "correct": false }
+      { "text": "1965", "correct": false },
+      { "text": "1969", "correct": true },
+      { "text": "1972", "correct": false },
+      { "text": "1975", "correct": false }
     ]
   },
   {
     "id": 18,
-    "difficulty": 3,
-    "question": "Which of the following sorting algorithm is the slowest on average?",
+    "difficulty": 2,
+    "category": "Environment",
+    "question": "Which layer of the Earth's atmosphere protects life by absorbing harmful Ultraviolet (UV) rays?",
     "answers": [
-      { "text": "Bubble sort", "correct": true },
-      { "text": "Heap sort", "correct": false },
-      { "text": "Shell sort", "correct": false },
-      { "text": "Quick sort", "correct": false }
+      { "text": "Troposphere", "correct": false },
+      { "text": "Ozone Layer", "correct": true },
+      { "text": "Mesosphere", "correct": false },
+      { "text": "Exosphere", "correct": false }
     ]
   },
   {
     "id": 19,
-    "difficulty": 3,
-    "question": "Which of the following data structure can be used to represent many-to-many relation?",
+    "difficulty": 2,
+    "category": "Geography",
+    "question": "What is the highest mountain peak above sea level in the world?",
     "answers": [
-      { "text": "B-tree", "correct": false },
-      { "text": "Binary tree", "correct": false },
-      { "text": "Graph", "correct": true },
-      { "text": "All of above", "correct": false }
+      { "text": "K2", "correct": false },
+      { "text": "Kangchenjunga", "correct": false },
+      { "text": "Mount Everest", "correct": true },
+      { "text": "Lhotse", "correct": false }
     ]
   },
   {
     "id": 20,
-    "difficulty": 3,
-    "question": "Which of the following statement is not true about linked lists?",
+    "difficulty": 2,
+    "category": "Literature",
+    "question": "Which famous English playwright and poet authored the tragedy 'Romeo and Juliet'?",
     "answers": [
-      { "text": "Element in a linked list, if it is sorted, can be quickly searched by applying binary search technique", "correct": true },
-      { "text": "Elements are not necessarily stored in contiguous locations", "correct": false },
-      { "text": "Insertions and deletions can be performed efficiently as compared to arrays", "correct": false },
-      { "text": "Linked list is a dynamic structure", "correct": false }
+      { "text": "Charles Dickens", "correct": false },
+      { "text": "William Shakespeare", "correct": true },
+      { "text": "Jane Austen", "correct": false },
+      { "text": "Mark Twain", "correct": false }
     ]
   },
   {
     "id": 21,
-    "difficulty": 1,
-    "question": "Which of the following is not a linear data structure?",
+    "difficulty": 2,
+    "category": "Indian Cities",
+    "question": "Which Indian city is popularly known as the 'Silicon Valley of India'?",
     "answers": [
-      { "text": "Stack", "correct": false },
-      { "text": "Queue", "correct": false },
-      { "text": "Linked list", "correct": false },
-      { "text": "Binary tree", "correct": true }
+      { "text": "Hyderabad", "correct": false },
+      { "text": "Pune", "correct": false },
+      { "text": "Bengaluru", "correct": true },
+      { "text": "Gurugram", "correct": false }
     ]
   },
   {
     "id": 22,
-    "difficulty": 1,
-    "question": "Which of the following data structure permits insertion and deletion operations only on one end of the structure?",
+    "difficulty": 2,
+    "category": "Scientific Instruments",
+    "question": "Which scientific instrument is specifically used to measure atmospheric pressure?",
     "answers": [
-      { "text": "Linked list", "correct": false },
-      { "text": "Array", "correct": false },
-      { "text": "Stack", "correct": true },
-      { "text": "Queue", "correct": false }
+      { "text": "Thermometer", "correct": false },
+      { "text": "Barometer", "correct": true },
+      { "text": "Hygrometer", "correct": false },
+      { "text": "Anemometer", "correct": false }
     ]
   },
   {
     "id": 23,
     "difficulty": 2,
-    "question": "A data structure in which linear sequence is maintained by pointers is known as",
+    "category": "World Organizations",
+    "question": "In which city is the international headquarters of the United Nations (UN) situated?",
     "answers": [
-      { "text": "Array", "correct": false },
-      { "text": "Stack", "correct": false },
-      { "text": "Linked list", "correct": true },
-      { "text": "Pointer-based data structure", "correct": false }
+      { "text": "Geneva", "correct": false },
+      { "text": "New York City", "correct": true },
+      { "text": "Washington, D.C.", "correct": false },
+      { "text": "London", "correct": false }
+    ]
+  },
+  {
+    "id": 24,
+    "difficulty": 2,
+    "category": "Astronomy",
+    "question": "Which planet in our solar system is nicknamed the 'Red Planet' due to iron oxide on its surface?",
+    "answers": [
+      { "text": "Jupiter", "correct": false },
+      { "text": "Mars", "correct": true },
+      { "text": "Saturn", "correct": false },
+      { "text": "Mercury", "correct": false }
+    ]
+  },
+  {
+    "id": 25,
+    "difficulty": 3,
+    "category": "Space History",
+    "question": "Who was the first human to journey into outer space aboard Vostok 1 in April 1961?",
+    "answers": [
+      { "text": "Neil Armstrong", "correct": false },
+      { "text": "Buzz Aldrin", "correct": false },
+      { "text": "Yuri Gagarin", "correct": true },
+      { "text": "Alan Shepard", "correct": false }
+    ]
+  },
+  {
+    "id": 26,
+    "difficulty": 3,
+    "category": "World History",
+    "question": "Which landmark peace treaty officially brought an end to World War I in June 1919?",
+    "answers": [
+      { "text": "Treaty of Paris", "correct": false },
+      { "text": "Treaty of Versailles", "correct": true },
+      { "text": "Treaty of Utrecht", "correct": false },
+      { "text": "Treaty of Ghent", "correct": false }
+    ]
+  },
+  {
+    "id": 27,
+    "difficulty": 3,
+    "category": "Chemistry",
+    "question": "What is the chemical name and formula for the compound popularly known as 'Laughing Gas'?",
+    "answers": [
+      { "text": "Nitric Oxide (NO)", "correct": false },
+      { "text": "Nitrogen Dioxide (NO2)", "correct": false },
+      { "text": "Nitrous Oxide (N2O)", "correct": true },
+      { "text": "Dinitrogen Tetroxide (N2O4)", "correct": false }
+    ]
+  },
+  {
+    "id": 28,
+    "difficulty": 3,
+    "category": "Physics",
+    "question": "Albert Einstein was awarded the 1921 Nobel Prize in Physics primarily for his discovery of which law?",
+    "answers": [
+      { "text": "General Theory of Relativity", "correct": false },
+      { "text": "Special Theory of Relativity", "correct": false },
+      { "text": "Law of the Photoelectric Effect", "correct": true },
+      { "text": "Brownian Motion Law", "correct": false }
+    ]
+  },
+  {
+    "id": 29,
+    "difficulty": 3,
+    "category": "Oceanography",
+    "question": "What is the name of the deepest known oceanic trench on Earth?",
+    "answers": [
+      { "text": "Puerto Rico Trench", "correct": false },
+      { "text": "Java Trench", "correct": false },
+      { "text": "Mariana Trench", "correct": true },
+      { "text": "Tonga Trench", "correct": false }
+    ]
+  },
+  {
+    "id": 30,
+    "difficulty": 3,
+    "category": "Economics & Banking",
+    "question": "In which year was the Reserve Bank of India (RBI) established under the RBI Act?",
+    "answers": [
+      { "text": "1930", "correct": false },
+      { "text": "1935", "correct": true },
+      { "text": "1947", "correct": false },
+      { "text": "1950", "correct": false }
+    ]
+  },
+  {
+    "id": 31,
+    "difficulty": 3,
+    "category": "Human Genetics",
+    "question": "In the human ABO and Rh blood grouping system, which blood type is considered the rarest globally?",
+    "answers": [
+      { "text": "O negative", "correct": false },
+      { "text": "B negative", "correct": false },
+      { "text": "AB negative", "correct": true },
+      { "text": "A negative", "correct": false }
+    ]
+  },
+  {
+    "id": 32,
+    "difficulty": 3,
+    "category": "Archaeology",
+    "question": "The 15th-century mountain citadel of Machu Picchu in Peru was constructed by which pre-Columbian civilization?",
+    "answers": [
+      { "text": "Maya Civilization", "correct": false },
+      { "text": "Aztec Civilization", "correct": false },
+      { "text": "Inca Civilization", "correct": true },
+      { "text": "Olmec Civilization", "correct": false }
+    ]
+  },
+  {
+    "id": 33,
+    "difficulty": 3,
+    "category": "Nobel Laureates",
+    "question": "Who was the first woman to win a Nobel Prize, and remains the only individual to win Nobel Prizes in two different scientific fields?",
+    "answers": [
+      { "text": "Rosalind Franklin", "correct": false },
+      { "text": "Marie Curie", "correct": true },
+      { "text": "Dorothy Hodgkin", "correct": false },
+      { "text": "Ada Lovelace", "correct": false }
+    ]
+  },
+  {
+    "id": 34,
+    "difficulty": 3,
+    "category": "Geography & Marine Life",
+    "question": "The Great Barrier Reef, the planet's largest coral reef ecosystem, is located off the north-east coast of which nation?",
+    "answers": [
+      { "text": "Brazil", "correct": false },
+      { "text": "Indonesia", "correct": false },
+      { "text": "Australia", "correct": true },
+      { "text": "South Africa", "correct": false }
     ]
   }
 ]

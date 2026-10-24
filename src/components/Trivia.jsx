@@ -10,18 +10,21 @@ const Trivia = ({
   onAnswerSelect,
   onCorrect,
   onWrong,
+  eliminatedAnswers = [],
+  isMuted = false,
 }) => {
   // Phase: "idle" | "selected" | "revealed"
   const [phase, setPhase] = useState("idle");
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [announcement, setAnnouncement] = useState("");
 
-  const [playIntro, { sound: introSound }] = useSound(play);
-  const [playCorrect] = useSound(correctSoundFile);
-  const [playWrong] = useSound(wrongSoundFile);
+  const [playIntro, { sound: introSound }] = useSound(play, { soundEnabled: !isMuted });
+  const [playCorrect] = useSound(correctSoundFile, { soundEnabled: !isMuted });
+  const [playWrong] = useSound(wrongSoundFile, { soundEnabled: !isMuted });
   const [playWait, { stop: stopWait }] = useSound(waitSoundFile, {
     loop: true,
     volume: 0.4,
+    soundEnabled: !isMuted,
   });
 
   const timeoutsRef = useRef([]);
@@ -34,7 +37,7 @@ const Trivia = ({
   // Play intro sound once on mount
   const introPlayedRef = useRef(false);
   useEffect(() => {
-    if (!introPlayedRef.current) {
+    if (!introPlayedRef.current && !isMuted) {
       try {
         playIntro();
       } catch {
@@ -42,7 +45,14 @@ const Trivia = ({
       }
       introPlayedRef.current = true;
     }
-  }, [introSound, playIntro]);
+  }, [introSound, playIntro, isMuted]);
+
+  // If muted state changes during game, stop wait audio
+  useEffect(() => {
+    if (isMuted) {
+      stopWait();
+    }
+  }, [isMuted, stopWait]);
 
   // Cleanup pending timeouts and suspense audio on unmount
   useEffect(() => {
@@ -62,8 +72,8 @@ const Trivia = ({
   }, [question, stopWait]);
 
   const handleAnswerClick = (answer) => {
-    // BUG-02: Guard against repeated clicks or clicking during reveal
-    if (phase !== "idle") return;
+    // Prevent clicking eliminated choices or clicking during reveal
+    if (phase !== "idle" || eliminatedAnswers.includes(answer.text)) return;
 
     setPhase("selected");
     setSelectedAnswer(answer);
@@ -73,11 +83,13 @@ const Trivia = ({
       onAnswerSelect(answer);
     }
 
-    // Play tension wait music during suspense
-    try {
-      playWait();
-    } catch {
-      // AudioContext fallback
+    // Play tension wait music during suspense if not muted
+    if (!isMuted) {
+      try {
+        playWait();
+      } catch {
+        // AudioContext fallback
+      }
     }
 
     // Phase 1: After 3s suspense, reveal correct and wrong choices
@@ -98,12 +110,12 @@ const Trivia = ({
     // Phase 2: After 5s total, play result SFX and trigger callback
     later(5000, () => {
       if (answer.correct) {
-        playCorrect();
+        if (!isMuted) playCorrect();
         later(1200, () => {
           if (onCorrect) onCorrect();
         });
       } else {
-        playWrong();
+        if (!isMuted) playWrong();
         later(1200, () => {
           if (onWrong) onWrong();
         });
@@ -112,6 +124,10 @@ const Trivia = ({
   };
 
   const getButtonClass = (answer) => {
+    if (eliminatedAnswers.includes(answer.text)) {
+      return "answer eliminated";
+    }
+
     if (phase === "idle") {
       return "answer";
     }
@@ -121,7 +137,6 @@ const Trivia = ({
     }
 
     if (phase === "revealed") {
-      // BUG-07: Always highlight correct in green; clicked wrong in red
       if (answer.correct) {
         return "answer correct";
       }
@@ -136,6 +151,11 @@ const Trivia = ({
 
   return (
     <div className="trivia">
+      {question?.category && (
+        <div className="categoryBadge">
+          📌 {question.category}
+        </div>
+      )}
       <div className="question" role="heading" aria-level={2}>
         {question?.question}
       </div>
@@ -148,14 +168,17 @@ const Trivia = ({
       <div className="answers">
         {question?.answers?.map((a, idx) => {
           const letter = String.fromCharCode(65 + idx); // A, B, C, D
+          const isEliminated = eliminatedAnswers.includes(a.text);
+
           return (
             <button
               type="button"
               key={a.text}
-              disabled={phase !== "idle"}
+              disabled={phase !== "idle" || isEliminated}
               className={getButtonClass(a)}
               onClick={() => handleAnswerClick(a)}
               aria-label={`Option ${letter}: ${a.text}`}
+              aria-hidden={isEliminated ? "true" : "false"}
             >
               <span className="answerLetter">{letter}:</span>
               <span className="answerText">{a.text}</span>
